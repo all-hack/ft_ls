@@ -21,30 +21,60 @@
 #include <stdio.h>
 #include <sys/stat.h>
 	
-typedef struct	s_node
+typedef struct	s_env
 {
-	char			*name;
-	char			*path;	
-	size_t			path_size;
-	size_t			size;	
-}				t_node;
+	char	*path;
+	char	*chr;
+	int		index;
+	char	**invalid;
+	
+}				t_context;
 
-typedef struct dirent t_filelist;
+typedef	struct 	s_clip
+{
+	char		*ssignal;
+	char		*lsignal;
+	char		*sflags;
+	char		*valid_sflags;
+	char		**lflags;
+	char		*valid_lflags[0];
+	char		**args;
+	char		*valid_args[0];
+	char		*sflags_exe;
+	char		*lflags_exe;
+	void		(*sflags_apply[0]) (void);
+	void		(*lflags_apply[0]) (void);
+	void		(*error)(int, char*);
+}				t_clip;
+
+typedef struct dirent t_file;
 typedef struct stat t_lstat;
 
-void ft_ls_error(int k, char *err);
 
-void	t_node_print(t_node *node);
+t_context	*t_context_init(char *path,  int index, char *chr, char **invalid);
+t_context	*t_context_add_path(t_context *context, char *curr_path);
+void		t_context_free(t_context **context);
 
-t_node	*t_node_init(char *name, char *path);
-void	t_node_clean(t_node **node);
-void	t_node_add_node(t_node *node, char *name);
-void	t_node_remove_node(t_node *node);
+t_clip		*t_clip_build(void (*error_apply)(int, char*));
+void		t_clip_destroy(t_clip **clip);
 
-void	t_filelist_print(t_filelist **list);
-t_filelist	**t_filelist_append(t_filelist **list, t_filelist *file, size_t size);
-t_filelist	**t_filelist_make(DIR	*der, int (*t_filelist_name_validator)(char*, char**), char **invalid_names);
-int		t_filelist_name_validator(char *file_name, char	**invalid_name);
+t_file		**filelist_init(t_context *context, char *filename);
+t_file		**filelist_addfile(t_file **filelist, t_file *file, size_t size);
+t_file		**filelist_build(size_t size);
+void		filelist_destroy(t_file	**filelist);
+
+int			file_validate(t_context *context, t_file *file);
+
+void		ft_ls_cli_error(int x, char *err);
+
+int			ft_strsearch_ov(char const *s, char const *c);
+void		ft_strlistdel(char	***strlist);
+
+
+
+
+
+
 
 # include						<stdio.h>
 #endif

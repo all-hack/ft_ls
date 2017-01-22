@@ -14,20 +14,20 @@
 
 static	t_list	*catch_leak(t_list *lst, t_list *(*f)(t_list *elem), int *flag)
 {
-	t_list *node;
+	t_list *env;
 
 	*flag = 0;
 	if (lst != NULL)
 	{
-		if ((node = f(lst)))
+		if ((env = f(lst)))
 		{
-			node->next = catch_leak(lst->next, f, flag);
+			env->next = catch_leak(lst->next, f, flag);
 			if (*flag == 0)
-				return (node);
+				return (env);
 			else
 			{
-				free(node->content);
-				free(node);
+				free(env->content);
+				free(env);
 				return (NULL);
 			}
 		}

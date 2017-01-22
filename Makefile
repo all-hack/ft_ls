@@ -17,15 +17,17 @@ B_PATH = build/
 H_PATH = include/
 LIBFT_PATH = libft
 
-FILES = ft_flows
+FILES = main
 
-FILES += ft_ls_error
+FILES += t_context_infa t_context_helper
 
-FILES += ft_tfilelist_helpers ft_tnode_helpers
+FILES += t_clip_infa
 
-FILES += 
+FILES += file_helper
 
-FILES += 
+FILES += filelist_infa
+
+FILES += ft_strsearch_ov
 
 FILES += 
 
