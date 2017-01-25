@@ -16,8 +16,6 @@
 
 
 
-
-
 void	t_context_print(t_context *context)
 {
 	int i;
@@ -31,30 +29,53 @@ void	t_context_print(t_context *context)
 	if (context->invalid)
 		while (context->invalid[i])
 		printf("context->invalid[%d]: %s\n", i, context->invalid[i++]);
-
-
 }
 
 
 
 
+void	t_clip_print(t_clip *clip)
+{
+
+
+	printf("ssignal: %s\n", clip->ssignal);
+	printf("lsignal: %s\n", clip->lsignal);
 
 
 
-
-
+}
 
 
 int	main(void)
 {
 
 	t_clip	*clip;
+	char	**strlist;
 
-	clip = t_clip_build(ft_ls_cli_error);
+	strlist = ft_strlist_add(strlist, "one\n");
+	strlist = ft_strlist_add(strlist, "two\n");
+
+	printf("len: %d\n", ft_strlist_len(strlist));
+	ft_strlist_print(strlist);
 
 	
 
-	t_clip_destroy(&clip);
+	printf("index of two: %d\n", ft_strlist_find(strlist, "two\n"));
+
+	// strlist = ft_strlist_minus(strlist);
+	strlist = ft_strlist_remove(strlist, "one\n");
+
+	ft_strlist_print(strlist);
+
+	ft_strlist_del(&strlist);
+
+	// clip = t_clip_build(ft_ls_cli_error);
+
+	// t_clip_init(clip);
+
+	
+
+	// t_clip_destroy(&clip);
 
 
 	// t_context	*context;
@@ -83,7 +104,7 @@ int	main(void)
 
 
 
-
+	return (0);
 }
 
 
