@@ -16,12 +16,17 @@
 void	t_clip_build_valid_lflags(t_clip *clip)
 {
 	if (clip)
+	{			
+		clip->valid_lflags[0] = NULL;
+	}
+	
+}
+
+void	t_clip_build_valid_sflags(t_clip *clip)
+{
+	if (clip)
 	{
-		if (*(clip->valid_lflags))
-		{
-			clip->valid_lflags[0] = "help";
-			clip->valid_lflags[1] = NULL;
-		}
+		clip->valid_sflags = "";
 	}
 	
 }
@@ -29,12 +34,9 @@ void	t_clip_build_valid_lflags(t_clip *clip)
 void	t_clip_build_valid_args(t_clip *clip)
 {
 	if (clip)
-	{
-		if (*(clip->valid_args))
-		{
-			clip->valid_args[0] = "abcdefghijklmnopqrstuwxyz0123456789";
-			clip->valid_args[1] = NULL;
-		}
+	{		
+		clip->valid_args[0] = "abcdefghijklmnopqrstuwxyz0123456789./";
+		clip->valid_args[1] = NULL;
 	}
 }
 
@@ -42,24 +44,17 @@ void	t_clip_build_sflags_apply(t_clip *clip)
 {
 	if (clip)
 	{
-		if (*(clip->sflags_apply))
-		{
-			clip->sflags_apply[0] = NULL;
-			clip->sflags_exe = "";
-		}
+		clip->sflags_apply[0] = NULL;
+		clip->sflags = ft_strdup("");
 	}
 }
 
 void	t_clip_build_lflags_apply(t_clip *clip)
 {
-
 	if (clip)
 	{
-		if (*(clip->lflags_apply))
-		{
-			clip->lflags_apply[0] = NULL;
-			clip->lflags_exe = "";
-		}
+		clip->lflags_apply[0] = NULL;
+		clip->lflags = ft_strdup("");
 	}
 }
 

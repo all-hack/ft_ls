@@ -26,7 +26,7 @@ char	**ft_strlist_remove(char **strlist, char *str)
 	{
 		i = -1;
 		len = ft_strlist_len(strlist);
-		index = ft_strlist_find(strlist, str);
+		index = ft_strlist_findindex(strlist, str);
 		if (index >= 0)
 		{
 			new_strlist = ft_strlist_build(len - 1);

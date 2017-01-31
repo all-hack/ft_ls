@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlist_add.c                                   :+:      :+:    :+:   */
+/*   ft_strlist_find.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelange <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 18:28:59 by obelange          #+#    #+#             */
-/*   Updated: 2017/01/23 18:29:02 by obelange         ###   ########.fr       */
+/*   Created: 2017/01/24 22:43:15 by obelange          #+#    #+#             */
+/*   Updated: 2017/01/24 22:43:16 by obelange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_ls.h"
 
-char	**ft_strlist_add(char **strlist, char *str)
+int	ft_strlist_findindex(char **strlist, char *str)
 {
-	char	**new_strlist;
-	size_t	i;
+	size_t	j;
 
+	j = 0;
 	if (strlist && str)
 	{
-		i = 0;
-		new_strlist = ft_strlist_build(ft_strlist_len(strlist) + 1);
-		while (strlist[i])
+		while (strlist[j])
 		{
-			new_strlist[i] = strlist[i];
-			i++;
-		}		
-		new_strlist[i] = ft_strdup(str);
-		free(strlist);		
-		return (new_strlist);
+			if (ft_strcmp(strlist[j], str) == 0)
+				return (j);
+			j++;
+		}
 	}
-	else if (str)
-	{
-		new_strlist = ft_strlist_build(1);
-		new_strlist[0] = ft_strdup(str);
-		return (new_strlist);
-	}
-	return (NULL);
+	return (-1);
 }
+
+
+
+

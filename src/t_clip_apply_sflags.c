@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlist_print.c                                 :+:      :+:    :+:   */
+/*   t_clip_apply_sflags.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelange <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/24 22:04:40 by obelange          #+#    #+#             */
-/*   Updated: 2017/01/24 22:04:42 by obelange         ###   ########.fr       */
+/*   Created: 2017/01/28 19:48:39 by obelange          #+#    #+#             */
+/*   Updated: 2017/01/28 19:48:40 by obelange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "libft.h"
 
-void	ft_strlist_print(char **strlist)
+void	t_clip_apply_sflags_default(t_clip *clip, t_context *context)
 {
-	size_t	i;
-
-	if (strlist)
+	if (clip && context)
 	{
-		i = 0;
-		while (strlist[i])
-		{
-			// printf("i: %d\n", i); 
-			ft_putstr(strlist[i++]);
-			ft_putstr("\n");
-		}
+
 	}
 }
+
+
+
+
+

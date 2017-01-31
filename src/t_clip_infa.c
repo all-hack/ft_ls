@@ -24,8 +24,6 @@ void	ft_ls_cli_error(int x, char *err)
 }
 
 
-
-
 t_clip	*t_clip_build(void (*error)(int, char*))
 {
 	t_clip	*clip;
@@ -41,12 +39,11 @@ t_clip	*t_clip_build(void (*error)(int, char*))
 	clip->valid_sflags = NULL;
 
 	clip->lflags = NULL;
+
 	clip->args = NULL;
 
-	clip->sflags_exe = NULL;
-	clip->lflags_exe = NULL;
 	clip->error = error;
-	
+
 	return (clip);
 }
 
@@ -56,7 +53,8 @@ void	t_clip_init(t_clip	*clip)
 	if (clip)
 	{
 		t_clip_build_valid_lflags(clip);
-		t_clip_build_valid_args(clip);		
+		t_clip_build_valid_args(clip);
+		t_clip_build_valid_sflags(clip);
 		clip->ssignal = "-";
 		clip->lsignal = "--";
 		t_clip_build_sflags_apply(clip);
@@ -72,7 +70,7 @@ void	t_clip_destroy(t_clip **clip)
 		if (*clip)
 		{
 			ft_strdel(&(*clip)->sflags);
-			ft_strlist_del(&(*clip)->lflags);
+			ft_strdel(&(*clip)->lflags);
 			ft_strlist_del(&(*clip)->args);
 			free(*clip);
 			*clip = NULL;

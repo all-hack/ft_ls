@@ -21,7 +21,7 @@ FILES = main
 
 FILES += t_context_infa t_context_helper
 
-FILES += t_clip_infa t_clip_infa_helper t_clip_parse
+FILES += t_clip_infa t_clip_infa_helper t_clip_engine t_clip_parse_helper
 
 FILES += file_helper
 
@@ -30,7 +30,7 @@ FILES += filelist_infa
 FILES += ft_strsearch_ov 
 
 FILES += ft_strlist_print ft_strlist_len ft_strlist_build ft_strlist_add \
-ft_strlist_del ft_strlist_minus ft_strlist_remove ft_strlist_find \
+ft_strlist_del ft_strlist_minus ft_strlist_remove ft_strlist_findindex \
 
 
 FILES += 
