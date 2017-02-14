@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "ft_ls.h"
 
-char	**ft_strlist_add(char **strlist, char *str)
+char	**ft_fstrlist_add(char **strlist, char *str)
 {
 	char	**new_strlist;
 	size_t	i;
@@ -28,6 +28,7 @@ char	**ft_strlist_add(char **strlist, char *str)
 			i++;
 		}		
 		new_strlist[i] = ft_strdup(str);
+		ft_strdel(&str);
 		free(strlist);		
 		return (new_strlist);
 	}
@@ -35,6 +36,7 @@ char	**ft_strlist_add(char **strlist, char *str)
 	{		
 		new_strlist = ft_strlist_build(1);
 		new_strlist[0] = ft_strdup(str);
+		ft_strdel(&str);
 		return (new_strlist);
 	}	
 	return (NULL);

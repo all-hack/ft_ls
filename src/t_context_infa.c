@@ -19,7 +19,7 @@ t_context	*t_context_build()
 
 	context = NULL;
 	if ((context = (t_context*)malloc(sizeof(t_context))) == 0)
-		ft_ls_cli_error(0, "Error: failed to mallocate for t_context\n");
+		ls_cli_error(0, "Error: failed to mallocate for t_context\n");
 	context->path = NULL;
 	context->index = -1;
 	context->chr = NULL;
@@ -42,7 +42,8 @@ t_context	*t_context_init(t_context *context, char *path, int index, char *chr)
 		if (chr)
 			context->chr = chr;
 		else
-			context->chr = "abcdefghijklmnopqrstuwxyz0123456789";		
+			context->chr = "\
+qwertyuiopasdfghjklzxcvbnm0123456789QWERTYUIOPASDFGHJKLZXCVBNM";		
 		return (context);
 	}
 	t_context_destroy(&context);

@@ -23,7 +23,7 @@ void	ft_strlist_del(char	***strlist)
 		{
 			i = 0;
 			while ((*strlist)[i])
-				ft_strdel(&((*strlist)[i++]));
+				ft_strdel(&((*strlist)[i++]));			
 			free(*strlist);
 			*strlist = NULL;  
 		}

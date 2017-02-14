@@ -36,10 +36,7 @@ int		t_clip_add_lflags(t_clip *clip, char *argv)
 		i = -1;
 		while (clip->valid_lflags[++i])
 			if (ft_strcmp(argv, clip->valid_lflags[i]) == 0)
-			{
 				clip->lflags[i] = '1';
-				return (1);
-			}
 	}
 	return (0);
 }
@@ -72,12 +69,9 @@ int		t_clip_add_sflags(t_clip *clip, char *argv)
 	{
 		j = -1;
 		while (argv[++j])
-		{
+		{			
 			if (ft_strchri(clip->valid_sflags, argv[j], &index))
-			{
 				clip->sflags[index] = '1';
-				return (1);
-			}
 		}
 	}
 	return (0);

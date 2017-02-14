@@ -14,7 +14,7 @@
 #include "ft_ls.h"
 
 
-void	ft_ls_cli_error(int x, char *err)
+void	ls_cli_error(int x, char *err)
 {
 	if (x < 1)
 	{
