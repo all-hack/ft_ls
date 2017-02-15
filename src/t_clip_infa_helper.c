@@ -16,8 +16,9 @@
 void	t_clip_build_valid_lflags(t_clip *clip)
 {
 	if (clip)
-	{			
-		clip->valid_lflags[0] = NULL;
+	{					
+		clip->valid_lflags[0] = "help";
+		clip->valid_lflags[1] = NULL;
 	}
 	
 }
@@ -26,7 +27,7 @@ void	t_clip_build_valid_sflags(t_clip *clip)
 {
 	if (clip)
 	{
-		clip->valid_sflags = "Rtlr";
+		clip->valid_sflags = "Rtlra";
 	}
 	
 }
@@ -49,8 +50,9 @@ void	t_clip_build_sflags_apply(t_clip *clip)
 		clip->sflags_apply[1] = t_clip_apply_sflags_t;
 		clip->sflags_apply[2] = t_clip_apply_sflags_l;
 		clip->sflags_apply[3] = t_clip_apply_sflags_r;
-		clip->sflags_apply[4] = NULL;
-		clip->sflags = ft_strdup("0000");
+		clip->sflags_apply[4] = t_clip_apply_sflags_a;
+		clip->sflags_apply[5] = NULL;
+		clip->sflags = ft_strdup("00000");
 	}
 }
 
@@ -58,8 +60,9 @@ void	t_clip_build_lflags_apply(t_clip *clip)
 {
 	if (clip)
 	{
-		clip->lflags_apply[0] = NULL;
-		clip->lflags = ft_strdup("");
+		clip->lflags_apply[0] = t_clip_apply_lflags_help;
+		clip->lflags_apply[1] = NULL;
+		clip->lflags = ft_strdup("0");
 	}
 }
 

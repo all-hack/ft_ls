@@ -22,7 +22,7 @@ FILES = main
 FILES += t_context_infa t_context_helper
 
 FILES += t_clip_infa t_clip_infa_helper t_clip_engine t_clip_parse_helper \
-t_clip_apply_sflags
+t_clip_apply_sflags t_clip_apply_lflags
 
 FILES += ls_engine ls_longprint ls_shortprint ls_argument_handling
 

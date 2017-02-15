@@ -22,6 +22,7 @@ void	ls_do_nothing(t_context *context, t_file **filelist)
 void	ls_recursion(t_context *context, t_file **filelist)
 {
 	t_lstat	rstat;
+	char	*str;
 
 	if (context && filelist)
 		while (*filelist)
@@ -29,7 +30,12 @@ void	ls_recursion(t_context *context, t_file **filelist)
 			context = t_context_add_path(context, (*filelist)->d_name);
 			lstat(context->path, &rstat);			
 			if (S_ISDIR(rstat.st_mode))
+			{
+				str = ls_pathname(context->path);
+				printf("\n%s:\n", str);
 				ls_engine(context);
+				ft_strdel(&str);
+			}
 			context = t_context_minus_path(context);
 			filelist++;
 		}

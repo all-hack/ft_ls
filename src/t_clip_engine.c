@@ -41,10 +41,11 @@ void	t_clip_application(t_clip *clip, t_context *context)
 	int	i;
 
 	i = -1;
-	t_clip_apply_default(clip, context);
+	t_clip_apply_default(clip, context);	
 	while (clip->lflags[++i])
 		if (clip->lflags[i] == '1')
 			clip->lflags_apply[i](clip, context);
+	
 	i = -1;
 	while (clip->sflags[++i])
 		if (clip->sflags[i] == '1')
@@ -56,8 +57,7 @@ void	t_clip_apply_default(t_clip *clip, t_context *context)
 {
 	if (context)
 	{
-		t_context_init(context, ".", -1, "\
-qwertyuiopasdfghjklzxcvbnm0123456789/.QWERTYUIOPASDFGHJKLZXCVBNM");
+		t_context_init(context, ".", -1, NULL);
 		context->invalid = ft_strlist_add(context->invalid, ".");
 		context->invalid = ft_strlist_add(context->invalid, "..");
 		context->filelist_action = ls_shortprint;

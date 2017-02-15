@@ -193,7 +193,7 @@ int	main(int argc, char **argv)
 			}
 	}
 	else
-		// ls_engine(context);
+		ls_engine(context);
 
 	t_context_destroy(&context);
 	ft_strlist_del(&dirList);

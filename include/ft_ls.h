@@ -56,11 +56,11 @@ typedef	struct 	s_clip
 	char		*sflags;
 	char		*valid_sflags;
 	char		*lflags;
-	char		*valid_lflags[1];
+	char		*valid_lflags[2];
 	char		**args;
 	char		*valid_args[2];
-	void		(*sflags_apply[5]) (struct 	s_clip *, t_context *);
-	void		(*lflags_apply[1]) (struct 	s_clip *, t_context *);
+	void		(*sflags_apply[6]) (struct 	s_clip *, t_context *);
+	void		(*lflags_apply[2]) (struct 	s_clip *, t_context *);
 	void		(*error)(int, char*);
 }				t_clip;
 
@@ -99,6 +99,9 @@ int			t_clip_add_lflags(t_clip *clip, char *argv);
 int			t_clip_check_sflags(t_clip *clip, char *argv);
 int			t_clip_add_sflags(t_clip *clip, char *argv);
 
+void		t_clip_apply_lflags_help(t_clip *clip, t_context *context);
+
+void		t_clip_apply_sflags_a(t_clip *clip, t_context *context);
 void		t_clip_apply_sflags_R(t_clip *clip, t_context *context);
 void		t_clip_apply_sflags_l(t_clip *clip, t_context *context);
 void		t_clip_apply_default(t_clip *clip, t_context *context);

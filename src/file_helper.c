@@ -22,6 +22,7 @@ int		file_validate(t_context *context, t_file *file)
 	{
 		i = 0;
 		tmp_dirent = ft_strsub(file->d_name, 0, context->index);
+		// printf("tmp_dirent: %s\n", tmp_dirent);
 		if (!(ft_strsearch_ov(tmp_dirent, context->chr)))
 		{
 			ft_strdel(&tmp_dirent);

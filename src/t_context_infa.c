@@ -43,7 +43,7 @@ t_context	*t_context_init(t_context *context, char *path, int index, char *chr)
 			context->chr = chr;
 		else
 			context->chr = "\
-qwertyuiopasdfghjklzxcvbnm0123456789QWERTYUIOPASDFGHJKLZXCVBNM";		
+qwertyuiopasdfghjklzxcvbnm0123456789/QWERTYUIOPASDFGHJKLZXCVBNM";		
 		return (context);
 	}
 	t_context_destroy(&context);
