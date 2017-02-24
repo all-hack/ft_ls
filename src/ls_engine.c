@@ -31,8 +31,8 @@ void	ls_recursion(t_context *context, t_file **filelist)
 			lstat(context->path, &rstat);			
 			if (S_ISDIR(rstat.st_mode))
 			{
-				str = ls_pathname(context->path);
-				printf("\n%s:\n", str);
+				str = ls_recurse_pathname(context->path);
+				ft_printf("\n%s:\n", str);
 				ls_engine(context);
 				ft_strdel(&str);
 			}
@@ -52,8 +52,10 @@ void	ls_engine(t_context *context)
 
 	filelist = context->filelist_sort(context, filelist);
 
-	context->filelist_action(context, filelist);
+	// filelist_print(filelist);
 
+	context->filelist_action(context, filelist);
+	ft_printf("\n");
 	context->bonus_action(context, filelist);
 	
 	

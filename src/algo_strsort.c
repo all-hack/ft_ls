@@ -25,7 +25,7 @@ char		**algo_asclex_strsort(t_context *context, char **filelist)
 	char	*tmp_file;
 	int		flag;
 	size_t	i;
-
+		
 	flag = 1;
 	if (filelist)
 	{

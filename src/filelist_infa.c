@@ -59,10 +59,10 @@ void	filelist_print(t_file **filelist)
 {
 	if (filelist)
 	{
-		printf("\n");
+		ft_printf("\n");
 		while (*filelist)
 		{
-			printf("file name: %-11s\n", (*filelist)->d_name);
+			ft_printf("file name: %-11s\n", (*filelist)->d_name);
 			filelist++;			
 		}
 	}
@@ -80,8 +80,7 @@ t_file	**filelist_init(t_context *context, char *filename, DIR **der)
 	size = 0;
 	if (filename)
 	{
-		*der = opendir(filename);		
-		if (*der)
+		if ((*der = opendir(filename)))
 		{
 			while ((file = readdir(*der)))
 			{
@@ -93,6 +92,8 @@ t_file	**filelist_init(t_context *context, char *filename, DIR **der)
 			}
 			// closedir(der);
 		}
+		else			
+			perror(filename);
 	}
 	return (filelist);
 }

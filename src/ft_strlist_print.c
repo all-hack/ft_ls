@@ -22,7 +22,7 @@ void	ft_strlist_print(char **strlist)
 		i = 0;
 		while (strlist[i])
 		{
-			// printf("i: %d\n", i); 
+			// ft_printf("i: %d\n", i); 
 			ft_putstr(strlist[i++]);
 			ft_putstr("\n");
 		}

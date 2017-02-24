@@ -36,7 +36,14 @@ char **ls_get_directories(t_context *context, char ***argList)
 				if (S_ISDIR(rstat.st_mode))
 				{
 					dirList = ft_strlist_add(dirList, (*argList)[i]);
-					*argList = ft_strlist_remove(*argList, (*argList)[i]);
+					if (ft_strlist_len(*argList) <= 1)						
+					{
+						ft_strlist_del(argList);
+						ft_strdel(&path);
+						break ;
+					}
+					else
+						*argList = ft_strlist_remove(*argList, (*argList)[i]);					
 					flag = 1;
 					ft_strdel(&path);
 					break ;

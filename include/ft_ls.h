@@ -24,6 +24,7 @@
 # include <uuid/uuid.h>
 # include <grp.h>
 # include <time.h>
+# include <libftprintf.h>
 # define BLK \x1b[30m 
 # define RED \x1b[31m
 # define GRN \x1b[32m
@@ -47,6 +48,7 @@ typedef struct	s_env
 	void	(*filelist_action)(struct s_env *, t_file **);
 	t_file	**(*filelist_sort)(struct s_env *, t_file **);
 	void	(*bonus_action)(struct s_env *, t_file **);
+	t_file	**(*filelist_rev_sort)(struct s_env *, t_file **);
 }				t_context;
 
 typedef	struct 	s_clip
@@ -76,6 +78,8 @@ void		ls_longprint_frame(struct s_env *context, t_file **filelist);
 void		ls_shortprint(struct s_env *context, t_file **filelist);
 char		*ls_pathname(char *str);
 char 		**ls_get_directories(t_context *context, char ***argList);
+char		*ls_longprint_timestring(t_lstat rstat);
+char		*ls_recurse_pathname(char *str);
 
 t_context	*t_context_init(t_context *context, char *path, int index, char *chr);
 t_context	*t_context_build();

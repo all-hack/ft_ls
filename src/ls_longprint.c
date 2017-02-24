@@ -32,19 +32,19 @@
 
 void	stat_print(t_lstat rstat)
 {
-	printf("%-13s %d\n", "st_dev:", rstat.st_dev);
-	printf("%-13s %lld\n", "st_ino:", rstat.st_ino);
-	printf("%-13s %d\n", "st_mode:", rstat.st_mode);
-	printf("%-13s %d\n", "st_nlink:", rstat.st_nlink);
-	printf("%-13s %u\n", "st_uid:", rstat.st_uid);
-	printf("%-13s %u\n", "st_gid:", rstat.st_gid);
-	printf("%-13s %lld\n", "st_atimespec:", rstat.st_atimespec);
-	printf("%-13s %lld\n", "st_mtimespec:", rstat.st_mtimespec);
-	printf("%-13s %lld\n", "st_ctimespec:", rstat.st_ctimespec);
-	printf("%-13s %lld\n", "st_size:", rstat.st_size);
-	printf("%-13s %lld\n", "st_blocks:", rstat.st_blocks);
-	printf("%-13s %d\n", "st_blksize:", rstat.st_blksize);
-	printf("%-13s %u\n", "st_gen:", rstat.st_gen);
+	ft_printf("%-13s %d\n", "st_dev:", rstat.st_dev);
+	ft_printf("%-13s %lld\n", "st_ino:", rstat.st_ino);
+	ft_printf("%-13s %d\n", "st_mode:", rstat.st_mode);
+	ft_printf("%-13s %d\n", "st_nlink:", rstat.st_nlink);
+	ft_printf("%-13s %u\n", "st_uid:", rstat.st_uid);
+	ft_printf("%-13s %u\n", "st_gid:", rstat.st_gid);
+	ft_printf("%-13s %lld\n", "st_atimespec:", rstat.st_atimespec);
+	ft_printf("%-13s %lld\n", "st_mtimespec:", rstat.st_mtimespec);
+	ft_printf("%-13s %lld\n", "st_ctimespec:", rstat.st_ctimespec);
+	ft_printf("%-13s %lld\n", "st_size:", rstat.st_size);
+	ft_printf("%-13s %lld\n", "st_blocks:", rstat.st_blocks);
+	ft_printf("%-13s %d\n", "st_blksize:", rstat.st_blksize);
+	ft_printf("%-13s %u\n", "st_gen:", rstat.st_gen);
 }
 
 // S_IRWXU
@@ -152,7 +152,7 @@ char	**ls_longprint_update_column(char **strlist, char *str, int *field, int i)
 	return (strlist);
 }
 
-char	*ls_longprint_pathname(t_lstat rstat, char *path, char *filetype)
+char	*ls_longprint_pathname(t_lstat rstat, char *path, char *filename, char *filetype)
 {
 	char	*pathname;
 
@@ -163,11 +163,11 @@ char	*ls_longprint_pathname(t_lstat rstat, char *path, char *filetype)
 		{
 			pathname = ft_strnew(rstat.st_size);
 			readlink(path, pathname, rstat.st_size);
-			pathname = ft_fstrmcatf(ft_strmcat(path, " -> "), pathname);
+			pathname = ft_fstrmcatf(ft_strmcat(filename, " -> "), pathname);
 		}
 		else
 		{
-			pathname = ft_strdup(path);
+			pathname = ft_strdup(filename);
 		}
 	}
 	return (pathname);
@@ -178,6 +178,7 @@ void	ls_longprint_totalblock(struct s_env *context, t_file **filelist)
 	t_lstat	rstat;	
 	char	*pathname;
 	size_t	total;
+	int		diff;
 
 	if (!(*filelist))
 		return ;
@@ -189,9 +190,15 @@ void	ls_longprint_totalblock(struct s_env *context, t_file **filelist)
 		lstat(pathname, &rstat);
 		total += rstat.st_size;
 		ft_strdel(&pathname);		
-		filelist++;		
+		filelist++;
 	}
-	printf("total %lu\n", total / 512);
+	diff = total % 512;
+	if (diff >= 256)
+		total = (total / 512) + 1;
+	else
+		total = (total / 512);
+
+	ft_printf("total %lu\n", total);
 }
 
 void	ls_longprint_engine(struct s_env *context, t_file **filelist, int *field)
@@ -213,10 +220,10 @@ void	ls_longprint_engine(struct s_env *context, t_file **filelist, int *field)
 	print = ls_longprint_update_column(print, getgrgid(rstat.st_gid)->gr_name, field, -2);
 	print = ls_longprint_update_column(print, ft_itoa(rstat.st_size), field, 3);
 	print = ls_longprint_update_column(print, ls_longprint_timestring(rstat), field, -99);
-	print = ls_longprint_update_column(print, ls_longprint_pathname(rstat, pathname, print[0]), field, -99);
+	print = ls_longprint_update_column(print, ls_longprint_pathname(rstat, pathname, (*filelist)->d_name, print[0]), field, -99);
 	
 	ls_longprint_engine(context, ++filelist, field);	
-	printf("%10s %*s %*s  %*s  %*s %s %s\n", print[0], field[0],
+	ft_printf("%10s %*s %*s  %*s  %*s %s %s\n", print[0], field[0],
 		print[1], field[1], print[2], field[2],
 		print[3], field[3], print[4], print[5], print[6]);	
 
@@ -231,7 +238,7 @@ void	ls_longprint_frame(struct s_env *context, t_file **filelist)
 	t_lstat	rstat;
 	int		field[4];
 	int		i;
-	int		len;
+	int		len;	
 	
 	if (filelist && context)
 	{
@@ -239,32 +246,34 @@ void	ls_longprint_frame(struct s_env *context, t_file **filelist)
 		while (i < 4)
 			field[i++] = 2;
 
-		// printf("%10s %2d %s %s %2d %s %s\n", print[0], rstat.st_nlink, print[1], print[2], rstat.st_size, print[3], print[4]);
+		// ft_printf("%10s %2d %s %s %2d %s %s\n", print[0], rstat.st_nlink, print[1], print[2], rstat.st_size, print[3], print[4]);
 		// ft_strlist_del(&print);
 		// ft_strdel(&pathname);
-		// printf("field: %p\n", field);
-		// printf("*field: %p\n", *field);
+		// ft_printf("field: %p\n", field);
+		// ft_printf("*field: %p\n", *field);
 		len = filelist_len(filelist);
 
 		if (len > 1)
 			ls_longprint_totalblock(context, filelist);
 		
+		filelist = context->filelist_rev_sort(context, filelist);
 		ls_longprint_engine(context, filelist, field);
-		
-		// printf("field 0: %d\n", field[0]);
-		// printf("field 1: %d\n", field[1]);
-		// printf("field 2: %d\n", field[2]);
-		// printf("field 3: %d\n", field[3]);
+		filelist = context->filelist_sort(context, filelist);
 
-		// printf("field 0: %d\n", *field[0]);
-		// printf("field 1: %d\n", *field[1]);
-		// printf("field 2: %d\n", *field[2]);
-		// printf("field 3: %d\n", *field[3]);
+		// ft_printf("field 0: %d\n", field[0]);
+		// ft_printf("field 1: %d\n", field[1]);
+		// ft_printf("field 2: %d\n", field[2]);
+		// ft_printf("field 3: %d\n", field[3]);
 
-		// printf("field 0: %d\n", (*field)[0]);
-		// printf("field 1: %d\n", (*field)[1]);
-		// printf("field 2: %d\n", (*field)[2]);
-		// printf("field 3: %d\n", (*field)[3]);
+		// ft_printf("field 0: %d\n", *field[0]);
+		// ft_printf("field 1: %d\n", *field[1]);
+		// ft_printf("field 2: %d\n", *field[2]);
+		// ft_printf("field 3: %d\n", *field[3]);
+
+		// ft_printf("field 0: %d\n", (*field)[0]);
+		// ft_printf("field 1: %d\n", (*field)[1]);
+		// ft_printf("field 2: %d\n", (*field)[2]);
+		// ft_printf("field 3: %d\n", (*field)[3]);
 
 	}
 }
