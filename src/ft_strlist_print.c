@@ -16,13 +16,12 @@
 void	ft_strlist_print(char **strlist)
 {
 	size_t	i;
-
+	
 	if (strlist)
 	{
 		i = 0;
 		while (strlist[i])
 		{
-			// ft_printf("i: %d\n", i); 
 			ft_putstr(strlist[i++]);
 			ft_putstr("\n");
 		}

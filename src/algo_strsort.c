@@ -18,8 +18,6 @@ char		**algo_no_strsort(t_context *context, char **filelist)
 	return (filelist);
 }
 
-// static int	lex_loop(char )
-
 char		**algo_asclex_strsort(t_context *context, char **filelist)
 {
 	char	*tmp_file;
@@ -77,17 +75,3 @@ char		**algo_desclex_strsort(t_context *context, char **filelist)
 	}
 	return (filelist);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

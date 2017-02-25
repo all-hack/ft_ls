@@ -27,7 +27,19 @@ t_context	*t_context_build()
 	return (context);
 }
 
+void	t_context_print(t_context *context)
+{
+	int i;
 
+	i = 0;
+	ft_printf("\n");
+	ft_printf("context->path: %s\n", context->path);
+	ft_printf("context->index: %d\n", context->index);
+	ft_printf("context->chr: %s\n", context->chr);
+	if (context->invalid)
+		while (context->invalid[i])
+		ft_printf("context->invalid[%d]: %s\n", i, context->invalid[i++]);
+}
 
 t_context	*t_context_init(t_context *context, char *path, int index, char *chr)
 {
@@ -43,7 +55,7 @@ t_context	*t_context_init(t_context *context, char *path, int index, char *chr)
 			context->chr = chr;
 		else
 			context->chr = "\
-qwertyuiopasdfghjklzxcvbnm0123456789/QWERTYUIOPASDFGHJKLZXCVBNM";		
+qwertyuiopasdfghjklzxcvbnm0123456789/_-QWERTYUIOPASDFGHJKLZXCVBNM";		
 		return (context);
 	}
 	t_context_destroy(&context);
@@ -57,7 +69,6 @@ void	t_context_destroy(t_context **context)
 		if (*context)
 		{
 			ft_strdel(&(*context)->path);
-			// ft_strdel(&(*context)->chr);
 			ft_strlist_del(&(*context)->invalid);
 			free(*context);
 			context = NULL;

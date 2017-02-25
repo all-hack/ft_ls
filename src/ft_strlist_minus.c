@@ -35,9 +35,3 @@ char	**ft_strlist_minus(char **strlist)
 	}
 	return (new_strlist);
 }
-
-
-
-
-
-

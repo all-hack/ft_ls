@@ -21,6 +21,3 @@ s.\n\x1b[32mUsage: ./ft_ls -[Rtlra] --[help] ARG\n");
 	t_clip_destroy(&clip);
 	exit (1);
 }
-
-
-

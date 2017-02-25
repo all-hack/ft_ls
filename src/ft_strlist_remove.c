@@ -42,5 +42,3 @@ char	**ft_strlist_remove(char **strlist, char *str)
 	}
 	return (new_strlist);
 }
-
-

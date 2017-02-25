@@ -80,13 +80,18 @@ char		*ls_pathname(char *str);
 char 		**ls_get_directories(t_context *context, char ***argList);
 char		*ls_longprint_timestring(t_lstat rstat);
 char		*ls_recurse_pathname(char *str);
+char		*ls_longprint_permbits(t_lstat rstat, int shift);
+char		*ls_longprint_permissions(t_lstat rstat);
+char		**ls_longprint_update_column(char **strlist, char *str, int *field, int i);
+char		*ls_longprint_pathname(t_lstat rstat, char *path, char *filename, char *filetype);
+void		ls_args_handleFile(t_context *context, char *filename);
 
 t_context	*t_context_init(t_context *context, char *path, int index, char *chr);
 t_context	*t_context_build();
 t_context	*t_context_add_path(t_context *context, char *curr_path);
 t_context	*t_context_minus_path(t_context *context);
 void		t_context_destroy(t_context **context);
-
+void		t_context_print(t_context *context);
 
 t_clip		*t_clip_build(void (*error_apply)(int, char*));
 void		t_clip_init(t_clip	*clip);

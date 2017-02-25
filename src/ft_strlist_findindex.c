@@ -29,7 +29,3 @@ int	ft_strlist_findindex(char **strlist, char *str)
 	}
 	return (-1);
 }
-
-
-
-

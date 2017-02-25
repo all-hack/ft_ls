@@ -76,4 +76,3 @@ int		t_clip_add_sflags(t_clip *clip, char *argv)
 	}
 	return (0);
 }
-

@@ -19,7 +19,6 @@ void	t_clip_parse_argv(t_clip *clip, char **argv)
 	{
 		while (*++argv)
 		{
-			// ft_printf("argv: %s\n", *argv);
 			if (ft_strncmp(*argv, "--", 2) == 0)				
 				t_clip_add_lflags(clip, *argv + 2);
 			else if (ft_strncmp(*argv, "-", 1) == 0)
@@ -28,7 +27,6 @@ void	t_clip_parse_argv(t_clip *clip, char **argv)
 			{
 				if (ft_strsearch_ov(*argv, clip->valid_args[0]) == 1)
 					{
-						// ft_printf("here\n");
 					clip->args = ft_strlist_add(clip->args, *argv);
 					}
 				else
@@ -48,7 +46,6 @@ void	t_clip_application(t_clip *clip, t_context *context)
 	while (clip->lflags[++i])
 		if (clip->lflags[i] == '1')
 			clip->lflags_apply[i](clip, context);
-	
 	i = -1;
 	while (clip->sflags[++i])
 		if (clip->sflags[i] == '1')
@@ -64,27 +61,14 @@ void	t_clip_apply_default(t_clip *clip, t_context *context)
 		context->invalid = ft_strlist_add(context->invalid, ".");
 		context->invalid = ft_strlist_add(context->invalid, "..");
 		context->filelist_action = ls_shortprint;
-		// context->filelist_sort = algo_no_sort;
 		context->filelist_sort = algo_asclex_sort;
 		context->filelist_rev_sort = algo_desclex_sort;
 		context->bonus_action = ls_do_nothing;
 	}
 }
 
-
 void	t_clip_engine(t_clip *clip, t_context *context, char **argv)
 {
 	t_clip_parse_argv(clip, argv);
 	t_clip_application(clip, context);
 }
-
-
-
-
-
-
-
-
-
-
-

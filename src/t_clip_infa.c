@@ -13,7 +13,6 @@
 #include "libft.h"
 #include "ft_ls.h"
 
-
 void	ls_cli_error(int x, char *err)
 {
 	if (x < 1)
@@ -23,7 +22,6 @@ void	ls_cli_error(int x, char *err)
 	}
 }
 
-
 t_clip	*t_clip_build(void (*error)(int, char*))
 {
 	t_clip	*clip;
@@ -31,22 +29,15 @@ t_clip	*t_clip_build(void (*error)(int, char*))
 	clip = NULL;
 	if ((clip = (t_clip*)malloc(sizeof(t_clip))) == 0)
 		error(0, "Error: failed to mallocate for t_clip\n");
-
 	clip->ssignal = NULL;
 	clip->lsignal = NULL;
-
 	clip->sflags = NULL;
 	clip->valid_sflags = NULL;
-
 	clip->lflags = NULL;
-
 	clip->args = NULL;
-
 	clip->error = error;
-
 	return (clip);
 }
-
 
 void	t_clip_init(t_clip	*clip)
 {
@@ -62,6 +53,17 @@ void	t_clip_init(t_clip	*clip)
 	}
 }
 
+void	t_clip_print(t_clip *clip)
+{
+	ft_printf("t_clip->ssignal: %s\n", clip->ssignal);
+	ft_printf("t_clip->lsignal: %s\n", clip->lsignal);
+	ft_printf("t_clip->lflag: %s\n", clip->lflags);
+	ft_printf("t_clip->sflag: %s\n", clip->sflags);
+	ft_printf("t_clip->valid lflags:\n");
+	ft_strlist_print(clip->valid_lflags);
+	ft_printf("t_clip->args list:\n");
+	ft_strlist_print(clip->args);
+}
 
 void	t_clip_destroy(t_clip **clip)
 {
@@ -77,17 +79,3 @@ void	t_clip_destroy(t_clip **clip)
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

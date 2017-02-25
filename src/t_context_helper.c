@@ -45,14 +45,3 @@ t_context	*t_context_minus_path(t_context *context)
 	}
 	return (context);
 }
-
-
-
-
-
-
-
-
-
-
-

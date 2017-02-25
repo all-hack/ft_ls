@@ -20,7 +20,6 @@ void	t_clip_build_valid_lflags(t_clip *clip)
 		clip->valid_lflags[0] = "help";
 		clip->valid_lflags[1] = NULL;
 	}
-	
 }
 
 void	t_clip_build_valid_sflags(t_clip *clip)
@@ -29,7 +28,6 @@ void	t_clip_build_valid_sflags(t_clip *clip)
 	{
 		clip->valid_sflags = "Rtlra";
 	}
-	
 }
 
 void	t_clip_build_valid_args(t_clip *clip)
@@ -37,7 +35,7 @@ void	t_clip_build_valid_args(t_clip *clip)
 	if (clip)
 	{		
 		clip->valid_args[0] = "\
-qwertyuiopasdfghjklzxcvbnm0123456789./QWERTYUIOPASDFGHJKLZXCVBNM";
+qwertyuiopasdfghjklzxcvbnm0123456789./_-QWERTYUIOPASDFGHJKLZXCVBNM";
 		clip->valid_args[1] = NULL;
 	}
 }
@@ -65,4 +63,3 @@ void	t_clip_build_lflags_apply(t_clip *clip)
 		clip->lflags = ft_strdup("0");
 	}
 }
-

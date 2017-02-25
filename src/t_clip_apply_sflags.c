@@ -61,9 +61,7 @@ void	t_clip_apply_sflags_a(t_clip *clip, t_context *context)
 	if (context)
 	{
 		context->chr = "\
-qwertyuiopasdfghjklzxcvbnm0123456789/.QWERTYUIOPASDFGHJKLZXCVBNM";
+qwertyuiopasdfghjklzxcvbnm0123456789/.-_QWERTYUIOPASDFGHJKLZXCVBNM";
 		ft_strlist_del(&(context->invalid));
 	}
 }
-
-

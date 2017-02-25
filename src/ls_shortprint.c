@@ -13,7 +13,6 @@
 #include "ft_ls.h"
 #include "libft.h"
 
-
 char	*ls_recurse_pathname(char *str)
 {
 	char	*pathname;
@@ -50,25 +49,13 @@ char	*ls_pathname(char *str)
 
 void	ls_shortprint(struct s_env *context, t_file **filelist)
 {
-	// char	*pathname;
-
 	if (context && filelist)
 	{
 		while (*filelist)
 		{	
-			// pathname = ft_fstrmcat(ls_pathname(context->path), (*filelist)->d_name);
 			ft_putstr((*filelist)->d_name); 	
 			ft_putstr("\n");
-			// ft_strdel(&pathname);
 			filelist++;
 		}
 	}
 }
-
-
-
-
-
-
-
-

@@ -68,13 +68,12 @@ void	filelist_print(t_file **filelist)
 	}
 }
 
-
 t_file	**filelist_init(t_context *context, char *filename, DIR **der)
 {
 	t_file	**filelist;
 	size_t	size;
-	// DIR		*der;
 	t_file	*file;
+
 	*der = NULL;
 	filelist = NULL;
 	size = 0;
@@ -90,7 +89,6 @@ t_file	**filelist_init(t_context *context, char *filename, DIR **der)
 				}
 
 			}
-			// closedir(der);
 		}
 		else			
 			perror(filename);
@@ -113,29 +111,3 @@ int	filelist_len(t_file **filelist)
 	}
 	return (i);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
