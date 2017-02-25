@@ -38,7 +38,10 @@ void	t_context_print(t_context *context)
 	ft_printf("context->chr: %s\n", context->chr);
 	if (context->invalid)
 		while (context->invalid[i])
-		ft_printf("context->invalid[%d]: %s\n", i, context->invalid[i++]);
+		{
+			ft_printf("context->invalid[%d]: %s\n", i, context->invalid[i]);
+			i++;
+		}
 }
 
 t_context	*t_context_init(t_context *context, char *path, int index, char *chr)

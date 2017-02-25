@@ -35,7 +35,7 @@ char	*ls_longprint_timestring(t_lstat rstat)
 	char	*btime;	
 	char	*time;
 
-	btime = ctime(&rstat.st_mtimespec);	
+	btime = ctime((const time_t *)&rstat.st_mtimespec);	
 	if (ft_strcmp(btime + 20, "2017"))
 		time = ft_strsub(btime, 4, 12);
 	else
