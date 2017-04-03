@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlist_del.c                                   :+:      :+:    :+:   */
+/*   ft_strlist_find.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelange <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 18:29:32 by obelange          #+#    #+#             */
-/*   Updated: 2017/01/23 18:29:34 by obelange         ###   ########.fr       */
+/*   Created: 2017/01/24 22:43:15 by obelange          #+#    #+#             */
+/*   Updated: 2017/01/24 22:43:16 by obelange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_ls.h"
 
-void	ft_strlist_del(char	***strlist)
+int	ft_strlist_findindex(char **strlist, char *str)
 {
-	size_t	i;
+	size_t	j;
 
-	if (strlist)
+	j = 0;
+	if (strlist && str)
 	{
-		if (*strlist)
+		while (strlist[j])
 		{
-			i = 0;
-			while ((*strlist)[i])
-			{
-				ft_strdel(&((*strlist)[i++]));
-			}	
-			free(*strlist);
-			*strlist = NULL;  
+			if (ft_strcmp(strlist[j], str) == 0)
+				return (j);
+			j++;
 		}
 	}
+	return (-1);
 }

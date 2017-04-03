@@ -23,11 +23,9 @@ t_clip	*t_clip_build(void (*error)(int, char*))
 	clip->ssignal = NULL;
 	clip->lsignal = NULL;
 	clip->sflags = NULL;
-	clip->valid_sflags = NULL;
 	clip->lflags = NULL;
 	clip->args = NULL;
-	clip->error = error;	
-	clip->arg_validator = ls_arg_validator;
+	clip->error = error;
 	return (clip);
 }
 
@@ -40,7 +38,7 @@ void	t_clip_init(t_clip	*clip)
 		clip->ssignal = "-";
 		clip->lsignal = "--";
 		t_clip_build_sflags_apply(clip);
-		t_clip_build_lflags_apply(clip);
+		t_clip_build_lflags_apply(clip);		
 	}
 }
 

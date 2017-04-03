@@ -20,13 +20,10 @@ t_context	*t_context_build()
 	context = NULL;
 	if ((context = (t_context*)malloc(sizeof(t_context))) == 0)
 		ls_cli_error(0, "Error: failed to mallocate for t_context\n");
-	context->access_path = NULL;
+	context->path = NULL;
 	context->index = -1;
 	context->chr = NULL;
 	context->invalid = NULL;
-	context->presentation_path = NULL;
-	context->filename = NULL;
-	context->pre_seed = NULL;
 	return (context);
 }
 
@@ -36,9 +33,7 @@ void	t_context_print(t_context *context)
 
 	i = 0;
 	ft_printf("\n");
-	ft_printf("context->access_path: %s\n", context->access_path);
-	ft_printf("context->presentation_path: %s\n", context->presentation_path);
-	ft_printf("context->filename: %s\n", context->filename);
+	ft_printf("context->path: %s\n", context->path);
 	ft_printf("context->index: %d\n", context->index);
 	ft_printf("context->chr: %s\n", context->chr);
 	if (context->invalid)
@@ -49,10 +44,11 @@ void	t_context_print(t_context *context)
 		}
 }
 
-t_context	*t_context_init(t_context *context, int index, char *chr)
+t_context	*t_context_init(t_context *context, char *path, int index, char *chr)
 {
-	if (context)
+	if (path && context)
 	{
+		context->path = ft_strdup(path);		
 		if (index == -1)
 			context->index = 1;
 		else
@@ -74,7 +70,7 @@ void	t_context_destroy(t_context **context)
 	{
 		if (*context)
 		{
-			ft_strdel(&(*context)->access_path);
+			ft_strdel(&(*context)->path);
 			ft_strlist_del(&(*context)->invalid);
 			free(*context);
 			context = NULL;

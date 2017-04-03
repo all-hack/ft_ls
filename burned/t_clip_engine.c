@@ -25,8 +25,10 @@ void	t_clip_parse_argv(t_clip *clip, char **argv)
 				t_clip_add_sflags(clip, *argv + 1);
 			else
 			{
-				if (clip->arg_validator(*argv) == 1)				
-					clip->args = ft_strlist_add(clip->args, *argv);
+				if (ft_strsearch_ov(*argv, clip->valid_args[0]) == 1)
+					{
+						clip->args = ft_fstrlist_add(clip->args, *argv);
+					}
 				else
 					clip->error(0, "\x1b[31mthis is not a valid argument, \
 please refer to --help for usage\x1b[37m\n");
@@ -55,12 +57,11 @@ void	t_clip_apply_default(t_clip *clip, t_context *context)
 {
 	if (context)
 	{
-		t_context_init(context, -1, NULL);
+		t_context_init(context, "/", -1, NULL);
 		context->invalid = ft_strlist_add(context->invalid, ".");
 		context->invalid = ft_strlist_add(context->invalid, "..");
 		context->filelist_action = ls_shortprint;
 		context->filelist_sort = algo_asclex_sort;
-		context->arg_sort = algo_asclex_strsort;
 		context->filelist_rev_sort = algo_desclex_sort;
 		context->bonus_action = ls_do_nothing;
 	}

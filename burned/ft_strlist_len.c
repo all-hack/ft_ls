@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlist_del.c                                   :+:      :+:    :+:   */
+/*   ft_strlist_len.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelange <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 18:29:32 by obelange          #+#    #+#             */
-/*   Updated: 2017/01/23 18:29:34 by obelange         ###   ########.fr       */
+/*   Created: 2017/01/24 21:46:05 by obelange          #+#    #+#             */
+/*   Updated: 2017/01/24 21:46:08 by obelange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_ls.h"
+#include "libft.h"
 
-void	ft_strlist_del(char	***strlist)
+size_t	ft_strlist_len(char	**strlist)
 {
 	size_t	i;
 
+	i = 0;
 	if (strlist)
 	{
-		if (*strlist)
-		{
-			i = 0;
-			while ((*strlist)[i])
-			{
-				ft_strdel(&((*strlist)[i++]));
-			}	
-			free(*strlist);
-			*strlist = NULL;  
-		}
+		while (strlist[i])
+			i++;		
 	}
+	return (i);
 }

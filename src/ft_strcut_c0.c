@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlist_del.c                                   :+:      :+:    :+:   */
+/*   ft_strtrim_c.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelange <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 18:29:32 by obelange          #+#    #+#             */
-/*   Updated: 2017/01/23 18:29:34 by obelange         ###   ########.fr       */
+/*   Created: 2016/10/20 15:13:00 by obelange          #+#    #+#             */
+/*   Updated: 2016/10/20 15:13:01 by obelange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_ls.h"
 
-void	ft_strlist_del(char	***strlist)
+void	ft_strcut_c0(char *s, char c)
 {
-	size_t	i;
+	size_t	start;
+	size_t	length;
 
-	if (strlist)
+	if (s)
 	{
-		if (*strlist)
-		{
-			i = 0;
-			while ((*strlist)[i])
-			{
-				ft_strdel(&((*strlist)[i++]));
-			}	
-			free(*strlist);
-			*strlist = NULL;  
-		}
+		start = 0;
+		length = ft_strlen(s);
+		if (length > 0)
+			while (*(s + length - 1) == c)				
+				s[length--] = '\0';		
 	}
+	return (NULL);
 }
+
+
+
+
+
+
+
+

@@ -34,8 +34,8 @@ char	**ft_strlist_remove(char **strlist, char *str)
 			while (++i < len)
 				if (i != index)
 					new_strlist[j++] = strlist[i];
-			ft_strdel(&strlist[i]);
-			free(strlist);
+			ft_strdel(&(strlist[index]));
+			free(strlist);			
 			return (new_strlist);
 		}
 		return (strlist);

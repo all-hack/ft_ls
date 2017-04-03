@@ -58,16 +58,17 @@ void	ls_longprint_totalblock(struct s_env *context, t_file **filelist)
 	total = 0;
 	while (*filelist)
 	{
-		pathname = ft_fstrmcat(ft_strmcat(context->access_path, "/"), (*filelist)->d_name);
+		pathname = ft_fstrmcat(ls_pathname(context->path), (*filelist)->d_name);
 		lstat(pathname, &rstat);
-		if (rstat.st_size % 512 != 0)
-			total += (rstat.st_size / 512) + 1;
-		else
-			total += (rstat.st_size / 512);
-
+		total += rstat.st_size;
 		ft_strdel(&pathname);		
 		filelist++;
-	}	
+	}
+	diff = total % 512;
+	if (diff >= 256)
+		total = (total / 512) + 1;
+	else
+		total = (total / 512);
 	ft_printf("total %lu\n", total);
 }
 
@@ -79,8 +80,7 @@ void	ls_longprint_engine(struct s_env *context, t_file **filelist, int *field)
 
 	if (!(*filelist))
 		return ;
-
-	pathname = ft_fstrmcat(ft_strmcat(context->access_path, "/"), (*filelist)->d_name);
+	pathname = ft_fstrmcat(ls_pathname(context->path), (*filelist)->d_name);
 	lstat(pathname, &rstat);
 	print = NULL;
 	print = ls_longprint_update_column(print, ls_longprint_permissions(rstat), field, -99);

@@ -37,9 +37,6 @@ int		t_clip_add_lflags(t_clip *clip, char *argv)
 		while (clip->valid_lflags[++i])
 			if (ft_strcmp(argv, clip->valid_lflags[i]) == 0)
 				clip->lflags[i] = '1';
-			else
-				clip->error(0, "\x1b[31mthis is not a valid flag, \
-please refer to --help for usage\x1b[37m\n");
 	}
 	return (0);
 }
@@ -75,9 +72,6 @@ int		t_clip_add_sflags(t_clip *clip, char *argv)
 		{			
 			if (ft_strchri(clip->valid_sflags, argv[j], &index))
 				clip->sflags[index] = '1';
-			else
-				clip->error(0, "\x1b[31mthis is not a valid flag, \
-please refer to --help for usage\x1b[37m\n");
 		}
 	}
 	return (0);

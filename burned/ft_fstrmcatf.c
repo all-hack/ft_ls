@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlist_del.c                                   :+:      :+:    :+:   */
+/*   ft_ft_printf_fstrmcatf.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelange <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 18:29:32 by obelange          #+#    #+#             */
-/*   Updated: 2017/01/23 18:29:34 by obelange         ###   ########.fr       */
+/*   Created: 2016/11/15 01:00:13 by obelange          #+#    #+#             */
+/*   Updated: 2016/11/15 01:00:15 by obelange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_ls.h"
 
-void	ft_strlist_del(char	***strlist)
+char	*ft_fstrmcatf(char *s1, char *s2)
 {
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*nstr;
 	size_t	i;
 
-	if (strlist)
-	{
-		if (*strlist)
-		{
-			i = 0;
-			while ((*strlist)[i])
-			{
-				ft_strdel(&((*strlist)[i++]));
-			}	
-			free(*strlist);
-			*strlist = NULL;  
-		}
-	}
+	if (s1)
+		s1_len = ft_strlen(s1);
+	else
+		s1_len = 0;
+	if (s2)
+		s2_len = ft_strlen(s2);
+	else
+		s2_len = 0;
+	nstr = ft_strnew((s1_len + s2_len));
+	ft_strncpy(nstr, s1, s1_len);
+	ft_strcat(nstr, s2);
+	ft_strdel(&s2);
+	ft_strdel(&s1);
+	return (nstr);
 }

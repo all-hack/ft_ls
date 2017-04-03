@@ -17,8 +17,7 @@ t_file	**filelist_build(size_t size)
 {
 	t_file	**filelist;
 
-	if ((filelist = (t_file**)malloc(sizeof(t_file) * (size + 1))) == NULL)
-		return (NULL);
+	filelist = (t_file**)malloc(sizeof(t_file) * (size + 1));
 	filelist[size] = NULL;
 	return (filelist);
 }
@@ -91,7 +90,7 @@ t_file	**filelist_init(t_context *context, char *filename, DIR **der)
 
 			}
 		}
-		else	
+		else			
 			perror(filename);
 	}
 	return (filelist);

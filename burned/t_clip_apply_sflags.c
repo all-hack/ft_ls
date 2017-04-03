@@ -33,8 +33,8 @@ void	t_clip_apply_sflags_t(t_clip *clip, t_context *context)
 {
 	if (context)
 	{
-		// context->filelist_sort = algo_desctime_sort;
-		// context->filelist_rev_sort = algo_asctime_sort;
+		context->filelist_sort = algo_desctime_sort;
+		context->filelist_rev_sort = algo_asctime_sort;
 	}
 }
 
@@ -44,15 +44,13 @@ void	t_clip_apply_sflags_r(t_clip *clip, t_context *context)
 	{
 		if (clip->sflags[1] == '1')
 		{
-			// context->filelist_sort = algo_asctime_sort;
-			// context->filelist_rev_sort = algo_desctime_sort;
-			// context->arg_sort = algo_desctime_sort			
+			context->filelist_sort = algo_asctime_sort;
+			context->filelist_rev_sort = algo_desctime_sort;
 		}
 		else 
 		{
 			context->filelist_sort = algo_desclex_sort;
 			context->filelist_rev_sort = algo_asclex_sort;
-			context->arg_sort = algo_desclex_strsort;
 		}
 		
 	}
@@ -62,7 +60,8 @@ void	t_clip_apply_sflags_a(t_clip *clip, t_context *context)
 {
 	if (context)
 	{
-		context->chr = "";
+		context->chr = "\
+qwertyuiopasdfghjklzxcvbnm0123456789/.-_QWERTYUIOPASDFGHJKLZXCVBNM";
 		ft_strlist_del(&(context->invalid));
 	}
 }

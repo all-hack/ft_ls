@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlist_del.c                                   :+:      :+:    :+:   */
+/*   ft_strsearch_ov.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obelange <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 18:29:32 by obelange          #+#    #+#             */
-/*   Updated: 2017/01/23 18:29:34 by obelange         ###   ########.fr       */
+/*   Created: 2016/12/29 07:18:08 by obelange          #+#    #+#             */
+/*   Updated: 2016/12/29 07:18:14 by obelange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_ls.h"
 
-void	ft_strlist_del(char	***strlist)
+static int	recursive_loop(char const s, char const *c)
 {
-	size_t	i;
-
-	if (strlist)
+	if (c)
 	{
-		if (*strlist)
-		{
-			i = 0;
-			while ((*strlist)[i])
-			{
-				ft_strdel(&((*strlist)[i++]));
-			}	
-			free(*strlist);
-			*strlist = NULL;  
-		}
+		while (*c)
+			if (s == *c++)
+				return (1);
+		return (0);
 	}
+	return (-1);
+}
+
+int			ft_strsearch_ov(char const *s, char const *c)
+{
+	if (s && c)
+	{
+		if (recursive_loop(*s, c) == 0)
+			return (0);
+		while (*++s)
+			if (recursive_loop(*s, c) == 0)
+				return (0);
+		return (1);
+	}
+	return (-1);
 }

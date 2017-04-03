@@ -28,7 +28,7 @@ char	**ft_strlist_add(char **strlist, char *str)
 			i++;
 		}		
 		new_strlist[i] = ft_strdup(str);
-		free(strlist);		
+		free(strlist);
 		return (new_strlist);
 	}
 	else if (str)
