@@ -46,6 +46,8 @@ typedef struct	s_env
 	char	*filename;
 	char	*pre_seed;
 	char	**(*arg_sort)(struct s_env *, char **);
+	char	**(*arg_timesort)(struct s_env *, char **);
+	char	**(*file_timesort)(struct s_env *, char **);
 	void	(*filelist_action)(struct s_env *, t_file **);
 	t_file	**(*filelist_sort)(struct s_env *, t_file **);
 	void	(*bonus_action)(struct s_env *, t_file **);
@@ -138,6 +140,7 @@ size_t		ft_strlist_len(char	**strlist);
 void		ft_strlist_del(char	***strlist);
 char 		*ft_strtrim_c(char *s, char c);
 void		ft_strcut_c0(char *s, char c);
+t_lstat		file_stat(t_context *context, t_file *file);
 
 t_file		**algo_no_sort(t_context *context, t_file **filelist);
 t_file		**algo_asclex_sort(t_context *context, t_file **filelist);
@@ -146,6 +149,11 @@ t_file		**algo_asctime_sort(t_context *context, t_file **filelist);
 t_file		**algo_desctime_sort(t_context *context, t_file **filelist);
 char		**algo_asclex_strsort(t_context *context, char **filelist);
 char		**algo_desclex_strsort(t_context *context, char **filelist);
+char		**algo_asctime_strsort(t_context *context, char **strlist);
+char		**algo_no_strsort(t_context *context, char **filelist);
+char		**algo_desctimes_strsort(t_context *context, char **filelist);
+char		**algo_desctimes_strsort_file(t_context *context, char **strlist);
+char		**algo_asctime_strsort_file(t_context *context, char **strlist);
 
 char		*extract_access_path(char *str);
 char		*extract_filename(char *str);

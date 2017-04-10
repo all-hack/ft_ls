@@ -61,6 +61,8 @@ void	t_clip_apply_default(t_clip *clip, t_context *context)
 		context->filelist_action = ls_shortprint;
 		context->filelist_sort = algo_asclex_sort;
 		context->arg_sort = algo_asclex_strsort;
+		context->arg_timesort = algo_no_strsort;
+		context->file_timesort = algo_no_strsort;
 		context->filelist_rev_sort = algo_desclex_sort;
 		context->bonus_action = ls_do_nothing;
 	}

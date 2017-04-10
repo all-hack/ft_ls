@@ -42,3 +42,22 @@ int		file_validate(t_context *context, t_file *file)
 	}
 	return (0);
 }
+
+t_lstat		file_stat(t_context *context, t_file *file)
+{
+	t_lstat	rstat;
+	char	*pathname;
+
+	if (file && context)
+	{
+		pathname = ft_fstrmcat(ft_strjoin(context->access_path, "/"), file->d_name);
+		lstat(pathname, &rstat);
+		ft_strdel(&pathname);
+	}
+
+	return (rstat);
+}
+
+
+
+

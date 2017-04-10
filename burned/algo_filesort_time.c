@@ -28,24 +28,32 @@ t_lstat		file_stat(t_context *context, t_file *file)
 	return (rstat);
 }
 
+static	void swap_files(t_context *context, t_file **filelist, int i, int *flag)
+{
+	t_file	*tmp_file;
+
+	tmp_file = filelist[i - 1];
+	filelist[i - 1] = filelist[i];
+	filelist[i] = tmp_file;
+	*flag = 1;
+}
+
 static	void	norm_cheat(t_context *context, t_file **filelist, int i,
 	int *flag)
 {
-	t_file	*tmp_file;
 	t_lstat	rstat;
 	t_lstat	astat;
 
 	rstat = file_stat(context, filelist[i]);
 	astat = file_stat(context, filelist[i - 1]); 
 	if (rstat.st_mtimespec.tv_sec < astat.st_mtimespec.tv_sec)
-	{
-		tmp_file = filelist[i - 1];
-		filelist[i - 1] = filelist[i];
-		filelist[i] = tmp_file;
-		*flag = 1;
-	}
+		swap_files(context, filelist, i, flag);
 	else if (rstat.st_mtimespec.tv_sec == astat.st_mtimespec.tv_sec)
-	{					
+	{
+		if (rstat.st_mtimespec.tv_nsec < astat.st_mtimespec.tv_nsec)
+		{
+
+		}
 		if (ft_strcmp(filelist[i]->d_name, filelist[i - 1]->d_name) > 0)
 		{
 			tmp_file = filelist[i - 1];
@@ -58,9 +66,10 @@ static	void	norm_cheat(t_context *context, t_file **filelist, int i,
 
 t_file		**algo_asctime_sort(t_context *context, t_file **filelist)
 {
-	// t_file	*tmp_file;
 	int		flag;
 	size_t	i;
+	t_lstat	rstat;
+	t_lstat	astat;
 
 	flag = 1;
 	if (filelist && context)
@@ -71,7 +80,17 @@ t_file		**algo_asctime_sort(t_context *context, t_file **filelist)
 			flag = 0;
 			while (filelist[i])
 			{
-				norm_cheat(context, filelist, i, &flag);
+				rstat = file_stat(context, filelist[i]);
+				astat = file_stat(context, filelist[i - 1]);
+				if (rstat.st_mtimespec.tv_sec < astat.st_mtimespec.tv_sec)
+					swap_files(context, filelist, i, flag);
+				else if (rstat.st_mtimespec.tv_sec == astat.st_mtimespec.tv_sec)
+				{
+					// if (rstat.st_mtimespec.tv_nsec < astat.st_mtimespec.tv_nsec)
+					// 	swap_files(context, filelist, i, flag);
+					if (ft_strcmp(filelist[i]->d_name, filelist[i - 1]->d_name) > 0)
+						swap_files(context, filelist, i, flag);
+				}
 				i++;
 			}
 		}

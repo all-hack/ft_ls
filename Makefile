@@ -30,7 +30,7 @@ FILES += ls_engine ls_longprint ls_longprint_permission
 #  ls_argument_handling_files
 
 FILES += algo_filesort algo_strsort
-# FILES += algo_filesort_time 
+FILES += algo_filesort_time  algo_strsort_time algo_strsort_fileTime
 
 FILES += file_helper
 

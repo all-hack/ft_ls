@@ -77,6 +77,11 @@ char	*ls_longprint_pathname(t_lstat rstat, char *path, char *filename, char *fil
 	pathname = NULL;
 	if (filetype && path)
 	{
+		if (path[0] == '.')
+			filename = ft_strdup(filename);
+		else
+			filename = ft_strdup(path);
+
 		if (filetype[0] == 'l')
 		{
 			pathname = ft_strnew(rstat.st_size);
@@ -84,9 +89,7 @@ char	*ls_longprint_pathname(t_lstat rstat, char *path, char *filename, char *fil
 			pathname = ft_fstrmcatf(ft_strmcat(filename, " -> "), pathname);
 		}
 		else
-		{
-			pathname = ft_strdup(filename);
-		}
+			return (filename);
 	}
 	return (pathname);
 }

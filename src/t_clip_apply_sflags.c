@@ -33,8 +33,10 @@ void	t_clip_apply_sflags_t(t_clip *clip, t_context *context)
 {
 	if (context)
 	{
-		// context->filelist_sort = algo_desctime_sort;
-		// context->filelist_rev_sort = algo_asctime_sort;
+		context->filelist_sort = algo_asctime_sort;
+		context->filelist_rev_sort = algo_desctime_sort;
+		context->arg_timesort = algo_asctime_strsort;
+		context->file_timesort = algo_asctime_strsort_file;
 	}
 }
 
@@ -44,9 +46,10 @@ void	t_clip_apply_sflags_r(t_clip *clip, t_context *context)
 	{
 		if (clip->sflags[1] == '1')
 		{
-			// context->filelist_sort = algo_asctime_sort;
-			// context->filelist_rev_sort = algo_desctime_sort;
-			// context->arg_sort = algo_desctime_sort			
+			context->filelist_sort = algo_desctime_sort;
+			context->filelist_rev_sort = algo_asctime_sort;
+			context->arg_timesort = algo_desctimes_strsort;
+			context->file_timesort = algo_desctimes_strsort_file;
 		}
 		else 
 		{

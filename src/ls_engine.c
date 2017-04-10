@@ -58,8 +58,6 @@ void	ls_recursion(t_context *context, t_file **filelist)
 		}
 }
 
-
-
 void	ls_do_nothing(t_context *context, t_file **filelist)
 {
 	return ;
@@ -81,22 +79,4 @@ void	ls_engine(t_context *context)
 	closedir(der);
 	filelist_destroy(&filelist);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

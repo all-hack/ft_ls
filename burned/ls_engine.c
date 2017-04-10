@@ -53,3 +53,19 @@ void	ls_engine(t_context *context)
 	closedir(der);
 	filelist_destroy(&filelist);
 }
+
+void	ls_arg_engine(t_context *context, t_file **filelist)
+{
+	t_file	**content;
+	DIR 	*der;
+
+	if ((filelist = filelist_init(context, context->path, &der)) == NULL)
+		return ;
+	filelist = context->filelist_sort(context, filelist);
+	context->filelist_action(context, filelist);
+	context->bonus_action(context, filelist);
+	closedir(der);
+	filelist_destroy(&filelist);
+
+
+}

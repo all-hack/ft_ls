@@ -41,18 +41,22 @@ t_file	**filelist_addfile(t_file **filelist, t_file *file, size_t size)
 	int j;
 	t_file	**new_filelist;
 
-	new_filelist = filelist_build(size + 1);
-	i = -1;
-	if (new_filelist && file)
+	if (file)
 	{
-		while (++i < size)
+		new_filelist = filelist_build(size + 1);
+		i = -1;
+		if (new_filelist && file)
 		{
-			new_filelist[i] = filelist[i];
+			while (++i < size)
+			{
+				new_filelist[i] = filelist[i];
+			}
 		}
+		new_filelist[i] = file;
+		free(filelist);
+		return (new_filelist);
 	}
-	new_filelist[i] = file;
-	free(filelist);
-	return (new_filelist);	
+	return (filelist);
 }
 
 
@@ -88,7 +92,6 @@ t_file	**filelist_init(t_context *context, char *filename, DIR **der)
 				{	
 					filelist = filelist_addfile(filelist, file, size++);
 				}
-
 			}
 		}
 		else	
