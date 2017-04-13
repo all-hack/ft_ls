@@ -155,6 +155,8 @@ char		**algo_desctimes_strsort(t_context *context, char **filelist);
 char		**algo_desctimes_strsort_file(t_context *context, char **strlist);
 char		**algo_asctime_strsort_file(t_context *context, char **strlist);
 
+void		t_clip_nope(t_context *context);
+
 char		*extract_access_path(char *str);
 char		*extract_filename(char *str);
 void		find_file(t_context *context, t_file **filelist);

@@ -111,7 +111,7 @@ w : build $(WC_OBJ)
 
 
 build : 
-	@mkdir build
+	@mkdir -p build
 
 clean :
 	@rm -rf build

@@ -70,13 +70,19 @@ void	ls_engine(t_context *context)
 
 	if ((filelist = filelist_init(context, context->access_path, &der)) == NULL)
 		return ;
+
+	// printf("filelist plain\n");
+	// filelist_print(filelist);
 	// ft_printf("access path: %s\n", extract_access_path(context->presentation_path));
 	// ft_printf("access path: %s\n", context->access_path);
 	// ft_printf("access path: %s\n", context->access_path);
 	filelist = context->filelist_sort(context, filelist);
+	// printf("filelist plain\n");
+	// filelist_print(filelist);
 	context->filelist_action(context, filelist);
 	context->bonus_action(context, filelist);
 	closedir(der);
+	// printf("0: %s\n", filelist[7]->d_name);
 	filelist_destroy(&filelist);
 }
 

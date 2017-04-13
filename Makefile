@@ -46,7 +46,7 @@ FILES += ft_strtrim_c ft_strmcatf ft_strsearch_ov ls_arguments ft_fstrmcatf
 
 OBJ = $(addprefix $(B_PATH), $(addsuffix .o, $(FILES)))
 
-LIB_COMP = -L$(LIBFT_PATH) -lft -I$(LIBFT_PATH) -L$(PRINTF_PATH) -lftprintf -I$(PRINTF_PATH)
+LIB_COMP = -L$(LIBFT_PATH) -lft -I $(LIBFT_PATH) -L$(PRINTF_PATH) -lftprintf -I $(PRINTF_PATH)
 
 FLAGS = -Wall -Werror -Wextra
 DEVF = $(FLAGS) -fsanitize=address
@@ -60,18 +60,18 @@ endif
 
 all : $(NAME)
 
-$(NAME) : build $(OBJ) libft.a libftprintf.a
+$(NAME) : $(OBJ) libft.a libftprintf.a
 	@echo ""
 	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIB_COMP)
 
-run : fclean build $(OBJ) libft.a libftprintf.a
+run : fclean $(B_PATH) $(OBJ) libft.a libftprintf.a
 	@echo "\x1b[31mrun is turned on\x1b[36m"
 	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIB_COMP) && printf "\x1b[37m" && ./$(NAME)
 
-dev : fclean build $(OBJ) libft.a libftprintf.a
+dev : fclean $(B_PATH) $(OBJ) libft.a libftprintf.a
 	gcc $(DEVF) -o $(NAME) $(OBJ) $(LIB_COMP)
 
-leak : fclean build $(OBJ) libft.a  libftprintf.a
+leak : fclean $(B_PATH) $(OBJ) libft.a  libftprintf.a
 	@echo "\x1b[31malloc wrap is turned on\x1b[36m"
 	gcc $(LEAKF) -o $(NAME) $(OBJ) $(LIB_COMP)
 
@@ -83,13 +83,14 @@ libftprintf.a :
 	@printf "\x1b[32m \ncompiling printf.... \x1b[36m"
 	@$(MAKE) -C $(PRINTF_PATH) all
 
-build :
-	@printf "\x1b[32m \nbuilding objects.....\n\x1b[33m"
-	@mkdir $(B_PATH)
 
-$(B_PATH)%.o : $(S_PATH)%.c
+$(B_PATH)%.o : $(S_PATH)%.c | $(B_PATH)
 	gcc -c $< -o $@ -I ./$(LIBFT_PATH)/$(H_PATH) -I ./$(H_PATH) -I ./$(PRINTF_PATH)/$(H_PATH)
 	
+$(B_PATH):
+	@printf "\x1b[32m \nbuilding objects.....\n\x1b[33m"
+	@mkdir -p $(B_PATH)
+
 clean : 
 	@rm -rf build
 	@$(MAKE) -C $(LIBFT_PATH) clean

@@ -19,7 +19,8 @@ t_file	**filelist_build(size_t size)
 
 	if ((filelist = (t_file**)malloc(sizeof(t_file) * (size + 1))) == NULL)
 		return (NULL);
-	filelist[size] = NULL;
+	ft_bzero(filelist, sizeof(t_file) * (size + 1));
+	// filelist[size] = NULL;
 	return (filelist);
 }
 
@@ -42,14 +43,16 @@ t_file	**filelist_addfile(t_file **filelist, t_file *file, size_t size)
 	t_file	**new_filelist;
 
 	if (file)
-	{
+	{		
 		new_filelist = filelist_build(size + 1);
 		i = -1;
-		if (new_filelist && file)
+		if (new_filelist)
 		{
 			while (++i < size)
-			{
+			{				
 				new_filelist[i] = filelist[i];
+				// printf("old file name: %-11s\n", filelist[i]->d_name);
+				// printf("new file name: %-11s\n\n", new_filelist[i]->d_name);
 			}
 		}
 		new_filelist[i] = file;
@@ -64,10 +67,12 @@ void	filelist_print(t_file **filelist)
 {
 	if (filelist)
 	{
-		ft_printf("\n");
+		printf("\n");
+		// printf("size: %d\n", filelist_len(filelist));
 		while (*filelist)
-		{
-			ft_printf("file name: %-11s\n", (*filelist)->d_name);
+		{			
+			printf("file name: %-11s\n", (*filelist)->d_name);
+			// printf("file node: %-11p\n", (*filelist)->d_ino);
 			filelist++;			
 		}
 	}
@@ -86,11 +91,18 @@ t_file	**filelist_init(t_context *context, char *filename, DIR **der)
 	{
 		if ((*der = opendir(filename)))
 		{
-			while ((file = readdir(*der)))
+			while ((file = readdir(*der)) != NULL && size < 79)
 			{
+				if (!file)
+					break;
+				// printf("filename: %s\n", file->d_name);
 				if (file_validate(context, file))
 				{	
-					filelist = filelist_addfile(filelist, file, size++);
+					filelist = filelist_addfile(filelist, file, size);
+					// printf("array   : %s\n\n", filelist[size]->d_name);
+					// filelist_print(filelist);
+					// printf("\n");
+					size += 1;
 				}
 			}
 		}

@@ -274,17 +274,20 @@ void	perform_ls_files(t_context *context, char **strfile)
 		// printf("perform_ls_files 2\n");
 		// printf("args: \n");
 		// ft_strlist_print(strfile);
-		strfile = context->file_timesort(context, strfile);
-		// printf("perform_ls_files 3\n");
-		while (*strfile)
+		if (strfile && *strfile)
 		{
-			context->access_path = extract_access_path(*strfile);
-			context->presentation_path = *strfile;		
-			context->pre_seed = context->presentation_path;
-			context->filename = extract_filename(*strfile++);
-			ls_engine(context);		
+			strfile = context->file_timesort(context, strfile);
+			// printf("perform_ls_files 3\n");
+			while (*strfile)
+			{
+				context->access_path = extract_access_path(*strfile);
+				context->presentation_path = *strfile;		
+				context->pre_seed = context->presentation_path;
+				context->filename = extract_filename(*strfile++);
+				ls_engine(context);		
+			}
+			context->pre_seed = NULL;
 		}
-		context->pre_seed = NULL;
 	}
 }
 
@@ -318,6 +321,7 @@ void	handle_arguments(t_clip *clip, t_context *context)
 	void	(*tmp)(struct s_env *, t_file **);
 
 	strdir = NULL;
+	context->pre_seed = NULL;
 	// clip->args = context->arg_sort(context, clip->args);
 	strdir = extract_dir_str(&clip->args);
 	strfile = clip->args;

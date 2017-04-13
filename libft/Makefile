@@ -70,7 +70,7 @@ $(B_PATH)%.o: $(S_PATH)%.c
 	@gcc -c $< -o $@ -I ./include
 
 build : 
-	@mkdir build
+	@mkdir -p build
 
 norm : 
 	norminette

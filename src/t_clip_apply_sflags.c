@@ -66,6 +66,8 @@ void	t_clip_apply_sflags_a(t_clip *clip, t_context *context)
 	if (context)
 	{
 		context->chr = "";
-		ft_strlist_del(&(context->invalid));
+		context->invalid = ft_strlist_remove(context->invalid, ".");
+		context->invalid = ft_strlist_remove(context->invalid, "..");
+		// ft_strlist_del(&(context->invalid));
 	}
 }

@@ -56,8 +56,7 @@ void	t_clip_apply_default(t_clip *clip, t_context *context)
 	if (context)
 	{
 		t_context_init(context, -1, NULL);
-		context->invalid = ft_strlist_add(context->invalid, ".");
-		context->invalid = ft_strlist_add(context->invalid, "..");
+		t_clip_nope(context);
 		context->filelist_action = ls_shortprint;
 		context->filelist_sort = algo_asclex_sort;
 		context->arg_sort = algo_asclex_strsort;
